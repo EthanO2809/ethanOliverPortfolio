@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-4" v-for="item in projects" :key="item.id">
+          <div class="card" style="width: 18rem">
+            <img
+              :src="item.image"
+              class="card-img-top"
+              :alt="item.name"
+              loading="lazy"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">
+                {{ item.description }}
+              </p>
+              <a :href="item.github" target="_blank" class="btn btn-primary"
+                >Github</a
+              >
+              <a :href="item.netlify" target="_blank" class="btn btn-primary"
+                >Netlify</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    projects() {
+      return this.$store.state.projects;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("fetchProjects");
+  },
+};
+</script>
+
+<style scoped></style>
